@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0月0日"
+            android:id="@+id/learn_date"
+            android:textSize="24dp"
+            android:textColor="#ff43bbbc" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="学习情况"
+                android:id="@+id/textView6"
+                android:textSize="18dp"
+                android:textColor="#ff43bbbc" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/learn_time"
+                android:textSize="18dp"
+                android:textColor="#ff43bbbc" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成功学习0次"
+                android:id="@+id/succes_num"
+                android:textSize="18dp"
+                android:paddingLeft="10dp"
+                android:textColor="#ff43bbbc" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="失败0次"
+                android:id="@+id/fail_num"
+                android:textSize="18dp"
+                android:paddingLeft="10dp"
+                android:textColor="#ff43bbbc" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

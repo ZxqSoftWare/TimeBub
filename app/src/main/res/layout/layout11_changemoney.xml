@@ -1,0 +1,53 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="20.0dip">
+
+    <!--时间的选择框-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/reshape_fillwhite"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:gravity="center"
+            android:text="请输入金额"
+            android:textColor="#ff43bbbc"
+            android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/money"
+                android:background="@drawable/reshape_green"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:singleLine="false"
+                android:padding="2dp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="确   定"
+            android:id="@+id/confirmmoney"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_green"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+</FrameLayout>

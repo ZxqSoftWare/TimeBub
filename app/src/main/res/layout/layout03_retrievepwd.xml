@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ff41bbbc">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="21">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"></TableRow>
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/back_to_login1"
+                android:background="@drawable/goback"
+                android:layout_gravity="center"
+                android:onClick="back_login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回"
+                android:onClick="login_in"
+                android:id="@+id/back_to_login"
+                android:layout_gravity="center"
+                android:paddingTop="3dp"
+                android:textColor="#ffffffff" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.4"></TableRow>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="56">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"></TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="找  回  密  码"
+                android:gravity="center"
+                android:id="@+id/text1"
+                android:layout_gravity="center"
+                android:layout_weight="5"
+                android:textColor="#ffffffff"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:background="@drawable/reshape_white" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"></TableRow>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/phone_email"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/shape"
+                android:layout_weight="5"
+                android:textSize="15dp"
+                android:padding="1dp"
+                android:hint="手机号/Email" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"></TableRow>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/IDnum"
+                    android:background="@drawable/shape"
+                    android:layout_weight="1"
+                    android:textColor="#ffa0a0a0"
+                    android:padding="4dp"
+                    android:layout_gravity="center"
+                    android:hint="验证码"
+                    android:textSize="15dp" />
+
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"></TableRow>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="发送验证码"
+                    android:id="@+id/sendID"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_purple"
+                    android:padding="2dp"
+                    android:textColor="#ffffffff" />
+
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="textPassword"
+                android:id="@+id/pwd"
+                android:layout_weight="5"
+                android:background="@drawable/shape"
+                android:hint="输入新密码"
+                android:padding="2dp"
+                android:textSize="15dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"></TableRow>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/confirmpwd"
+                android:layout_weight="5"
+                android:background="@drawable/shape"
+                android:hint="确认密码"
+                android:padding="1dp"
+                android:textSize="15dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"></TableRow>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="确       定"
+                android:id="@+id/confirm_pwd"
+                android:layout_weight="5"
+                android:background="@drawable/shape_purple"
+                android:padding="1dp"
+                android:textColor="#ffffffff"
+                android:onClick="retrieve_pwd" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="26"></TableRow>
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="21"></TableRow>
+    </LinearLayout>
+</LinearLayout>

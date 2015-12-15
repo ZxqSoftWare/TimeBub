@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <!-- 应用的图片 -->
+    <ImageView android:id="@+id/imageItem"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp" />
+
+    <!-- 应用的名称&英文名 -->
+    <!-- 不想要英文名可以把titleitem删了……  -->
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/nameItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff43bbbc"
+            android:textSize="22dp"
+            android:layout_marginTop="3dp" />
+
+        <TextView android:id="@+id/titleItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff43bbbc"
+            android:textSize="13dp"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+
+    <!-- 选择框 id是checkItem-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <CheckBox android:id="@+id/checkItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="3dp"
+            android:layout_gravity="right" />
+    </LinearLayout>
+
+</LinearLayout>

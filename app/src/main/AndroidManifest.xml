@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.timebub.qz.timebub"
+    android:versionName="V1.2.0 build.315">
+
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="时间泡"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.timebub.qz.timebub.TimeBubMain"
+            android:label="时间泡"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubStart"
+            android:label="时间泡"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubLogin"
+            android:label="登录"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubReg"
+            android:label="注册"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubLookforPsw"
+            android:label="找回密码"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubSelectLockedApp"
+            android:label="程序锁"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubUnLocking"
+            android:label="locking"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubSetTime"
+            android:label="设置时间"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubSetMoney"
+            android:label="设置金钱"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"
+            android:excludeFromRecents="true"
+            >
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubAppLocking"
+            android:label="时间泡封印中"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubStudyFinish"
+            android:label="学习成功"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubStudyFail"
+            android:label="学习失败"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubUserRecord"
+            android:label="学习记录"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <activity android:name="com.timebub.qz.timebub.TimeBubChangePsw"
+            android:label="修改密码"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true">
+
+        </activity>
+        <provider
+            android:authorities="com.timebub.qz.applock"
+            android:name="com.timebub.qz.applock.AppLockProvider"
+            >
+        </provider>
+        <service android:name="com.timebub.qz.applock.AppLockService">
+        </service>
+        <service android:name="com.timebub.qz.applock.AppLockTimeCountService">
+
+        </service><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+
+</manifest>

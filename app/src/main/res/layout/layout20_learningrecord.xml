@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50sp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="历史记录"
+            android:id="@+id/history"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:textColor="#ff41bbbc"
+            android:background="@drawable/retangle_green" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="相关统计"
+            android:id="@+id/stat"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:textColor="#6b8592"
+            android:background="@drawable/retangle_green" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView2"
+        android:divider="#ff41bbbc"
+        android:dividerHeight="1sp" />
+</LinearLayout>

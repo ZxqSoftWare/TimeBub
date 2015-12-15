@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"></TableRow>
+
+        <ImageView
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:id="@+id/imageView2"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/fail" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务失败"
+            android:id="@+id/textView5"
+            android:textSize="40sp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ff41bbbc" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1.5" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本次学习 00 分钟"
+            android:id="@+id/textView11"
+            android:textSize="19sp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="损失了 00 元"
+            android:id="@+id/textView12"
+            android:textSize="19sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30sp">
+
+            <TableRow
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></TableRow>
+
+            <Button
+                android:layout_width="130sp"
+                android:layout_height="wrap_content"
+                android:text="求骂醒"
+                android:id="@+id/button2"
+                android:background="@drawable/shape_gray"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:layout_width="130sp"
+                android:layout_height="wrap_content"
+                android:text="再接再厉"
+                android:id="@+id/button3"
+                android:layout_marginLeft="25sp"
+                android:background="@drawable/shape_green"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF" />
+
+            <TableRow
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <!-- 排名 -->
+
+    <TextView android:id="@+id/ranking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="30dp" />
+
+    <!-- 应用的名称&英文名 -->
+    <!-- 不想要英文名可以把titleitem删了……  -->
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/titleItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff43bbbc"
+            android:textSize="22dp"
+            android:layout_marginTop="5dp"
+            android:text="用户名" />
+        <TextView android:id="@+id/nameItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff43bbbc"
+            android:textSize="13dp"
+            android:layout_marginTop="3dp"
+            android:text="今天学习了00分00秒00小时" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

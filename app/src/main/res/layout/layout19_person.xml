@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="68">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的等级"
+                android:id="@+id/textView8"
+                android:textColor="#ff43bbbc"
+                android:textSize="22dp"
+                android:padding="2dp"
+                android:layout_marginLeft="10dp" />
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20级"
+                android:id="@+id/textView2"
+                android:textColor="#ff43bbbc"
+                android:textSize="22dp"
+                android:padding="2dp"
+                android:layout_marginRight="15dp" />
+
+        </LinearLayout>
+
+        <View android:layout_height="1px"
+            android:background="#ffd2d2d2"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="5dp"></View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的积分"
+                android:id="@+id/textView3"
+                android:textColor="#ff43bbbc"
+                android:textSize="22dp"
+                android:padding="2dp"
+                android:layout_marginLeft="10dp" />
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100分"
+                android:id="@+id/textView4"
+                android:textColor="#ff43bbbc"
+                android:textSize="22dp"
+                android:padding="2dp"
+                android:layout_marginRight="15dp" />
+        </LinearLayout>
+
+        <View android:layout_height="1px"
+            android:background="#ffd2d2d2"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="5dp"></View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:text="学习记录"
+                android:id="@+id/record"
+                android:background="@drawable/transparent"
+                android:textColor="#43bbbc"
+                android:textSize="22dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="15dp"
+                android:gravity="left|right" />
+
+            <ImageButton
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:id="@+id/recharge_score"
+                android:background="@drawable/next_blue"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp" />
+
+        </LinearLayout>
+
+
+        <View android:layout_height="1px"
+            android:background="#ffd2d2d2"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="5dp"></View>
+
+        <View android:layout_height="1px"
+            android:background="#ffd2d2d2"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="5dp"></View>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="60" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="签到"
+                android:id="@+id/clockin"
+                android:background="@drawable/shape_green"
+                android:textColor="#ffffffff"
+                android:textSize="20dp"
+                android:layout_weight="0"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

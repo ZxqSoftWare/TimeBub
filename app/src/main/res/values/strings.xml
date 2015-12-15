@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">时间泡</string>
+
+    <string name="title_section1">主页</string>
+    <string name="title_section2">个人</string>
+    <string name="title_section3">设置</string>
+    <string name="title_section4">帮助</string>
+    <string name="title_section5">反馈</string>
+
+    <string name="layout_section1">fragment_main_o</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

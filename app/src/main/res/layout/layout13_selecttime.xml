@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="20.0dip">
+
+    <!--时间的选择框-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/reshape_fillwhite"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:gravity="center"
+            android:text="请选择时间"
+            android:textColor="#ff43bbbc"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+       <!--安卓原生的timepicker，需要进行更改-->
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+            <NumberPicker
+                android:id="@+id/timehour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            </NumberPicker>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textSize="40dp"
+                android:textColor="#ffffff"/>
+            <NumberPicker
+                android:id="@+id/timemin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </NumberPicker>
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="确   定"
+            android:id="@+id/confirmtime"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_green"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+    </LinearLayout>
+
+</FrameLayout> 
