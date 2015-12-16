@@ -23,8 +23,8 @@
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 
 
--libraryjars /libs/alipaySDK-20151014.jar
--libraryjars /libs/SMSSDK-1.3.1.jar
+#-libraryjars /libs/alipaySDK-20151014.jar
+#-libraryjars /libs/SMSSDK-1.3.1.jar
 
 -dontwarn com.alipay.**
 -keep class com.alipay.** { *;}
