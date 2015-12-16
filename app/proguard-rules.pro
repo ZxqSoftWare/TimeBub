@@ -15,3 +15,26 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-ignorewarnings
+-optimizationpasses 5
+-dontpreverify
+-verbose
+
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+
+-libraryjars /libs/alipaySDK-20151014.jar
+-libraryjars /libs/SMSSDK-1.3.1.jar
+
+-dontwarn com.alipay.**
+-keep class com.alipay.** { *;}
+
+-dontwarn com.mob.**
+-keep class com.mob.** { *;}
+
+-dontwarn cn.smssdk.**
+-keep class cn.smssdk.** { *;}
+
+
+
+
