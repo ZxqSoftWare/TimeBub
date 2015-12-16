@@ -90,7 +90,7 @@ public class TimeBubMain extends ActionBarActivity
         restoreActionBar();
         GetServiceStatus serviceStatus = new GetServiceStatus();
         tools = new TimeBubTools(this);
-        lastStudyState = share.getData("lastState");
+        lastStudyState = share.getData("lastState"); 
         if (serviceStatus.getServiceStatus(TimeBubMain.this, "com.timebub.qz.applock.AppLockService")) {
 //            tools.makeToast("服务正在运行");
         } else {
