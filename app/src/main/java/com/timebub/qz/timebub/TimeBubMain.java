@@ -89,8 +89,9 @@ public class TimeBubMain extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));//获取drawer_layout的id……【这个到底在哪里啊
         restoreActionBar();
         GetServiceStatus serviceStatus = new GetServiceStatus();
+//        mNavigationDrawerFragment.openDrawer();
         tools = new TimeBubTools(this);
-        lastStudyState = share.getData("lastState"); 
+        lastStudyState = share.getData("lastState");
         if (serviceStatus.getServiceStatus(TimeBubMain.this, "com.timebub.qz.applock.AppLockService")) {
 //            tools.makeToast("服务正在运行");
         } else {
@@ -391,13 +392,26 @@ public class TimeBubMain extends ActionBarActivity
         ResolveInfo homeInfo =
                 pm.resolveActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME), 0);
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if(mNavigationDrawerFragment.isDrawerOpen()) {
+                mNavigationDrawerFragment.closeDrawer();
+                return true;
+            }
             ActivityInfo ai = homeInfo.activityInfo;
             Intent startIntent = new Intent(Intent.ACTION_MAIN);
             startIntent.addCategory(Intent.CATEGORY_LAUNCHER);
             startIntent.setComponent(new ComponentName(ai.packageName, ai.name));
             startActivitySafely(startIntent);
             return true;
-        } else
+        } else if(keyCode==KeyEvent.KEYCODE_MENU){
+            if(mNavigationDrawerFragment.isDrawerOpen()) {
+                mNavigationDrawerFragment.closeDrawer();
+                return true;
+            }
+            else {
+                mNavigationDrawerFragment.openDrawer();
+                return true;
+            }
+        }  else
             return super.onKeyDown(keyCode, event);
     }
 
