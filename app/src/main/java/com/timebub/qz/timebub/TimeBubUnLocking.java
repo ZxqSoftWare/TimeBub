@@ -171,7 +171,9 @@ public class TimeBubUnLocking extends Activity {
 //                if(dblHour==0&&dblSec==1&&dblMin==0){
 //                    timer.cancel();
 //                }
-                if(lHour==0&&lSec==0&&lMin==0){
+                if(lHour<=0&&lSec<=0&&lMin<=0){
+                    txtLearnTime.setText("00" + " : " + "00" + " : " + "00");
+                    finish();
                     timer.cancel();
                 }
             }

@@ -88,10 +88,11 @@ public class TimeBubLogin extends Activity {
                     JSONTokener tokener = new JSONTokener(result);
                     JSONObject object = (JSONObject) tokener.nextValue();
                     String userid=object.getString("status");
-                    JSONObject userdata=object.getJSONObject("data");
+
                     
                     if(userid.equals("0")) {
 //                        tools.makeToast("登陆成功"+userdata.getString("userId"));
+                        JSONObject userdata=object.getJSONObject("data");
                         tools.makeToast("登录成功");
 //                        Intent intent = new Intent(TimeBubLogin.this,TimeBubLogin.class);
                         Public_Enum.userID=userdata.getString("userId");
@@ -109,7 +110,7 @@ public class TimeBubLogin extends Activity {
                     je.printStackTrace();
                 }
 
-//                tools.makeToast("1" + result);
+//                tools.makeToast("1:" + result);
 
             }
             super.handleMessage(msg);

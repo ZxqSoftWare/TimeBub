@@ -13,7 +13,7 @@ android {
         applicationId "com.timebub.qz.protectyoureyes"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 323
+        versionCode 325
         versionName "1.2"
     }
     buildTypes {

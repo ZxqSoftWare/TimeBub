@@ -89,7 +89,7 @@ public class TimeBub_Frag_Main extends Fragment {
         }
 //        updateDialog("V1.2","test");
         String tem=tools.getCurrentVer();
-        new Thread(new getLatestVer()).start();
+//        new Thread(new getLatestVer()).start();
         setTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,15 +116,21 @@ public class TimeBub_Frag_Main extends Fragment {
             public void onClick(View view) {
                 String date = String.valueOf(System.currentTimeMillis());
                 sharePreference.saveData("startDate", date);
+                boolean isTime=true;
+                boolean isMoney=true;
                 if(sharePreference.getData("timeLimt").toString().equals("Not Found")){
                     sharePreference.saveData("timeLimt","0:30");
-                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
+                    isTime=false;
+//                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
 //                    return;
                 }if(sharePreference.getData("money").toString().equals("Not Found")){
                     sharePreference.saveData("money","2.0");
-                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
+                    isMoney=false;
+//                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
 //                    return;
                 }
+                if(!isMoney) tools.makeToast("您未设置学习时间，默认为30分钟");
+                if(!isTime) tools.makeToast("您未设置金额，默认为2.0元");
                 if(lockDao.findAll().size()==0){
                     tools.makeToast("不选应用就想学习？想得美！");
                     return;

@@ -78,6 +78,10 @@ public class TimeBubUserRecord extends Activity {
         @Override
         public void handleMessage(Message msg) {
             String result = msg.getData().getString("record");
+            if (result.equals("timeout")) {
+                tools.makeToast(Public_Enum.timeoutMsg);
+                return;
+            }
             List<RecordInfo> infos = new ArrayList<RecordInfo>();
             try {
                 JSONTokener tokener = new JSONTokener(result);
@@ -86,7 +90,7 @@ public class TimeBubUserRecord extends Activity {
                 if (status.equals("0")) {
                     JSONArray array = object.getJSONArray("data");
                     JSONObject dataobject;
-                    for (int i = 0; i < array.length(); i++) {
+                    for (int i = array.length()-1; i >0 ; i--) {
                         String tem=array.getJSONObject(i).toString();
 //                        if(array.getJSONObject(i).toString().contains("successCount")) {
                             RecordInfo info = new RecordInfo();

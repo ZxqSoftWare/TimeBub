@@ -1,8 +1,11 @@
 package com.timebub.qz.timebub;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -10,6 +13,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -38,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -63,6 +68,9 @@ public class TimeBubMain extends ActionBarActivity
     TimeBubSharePreference share;
     TimeBubTools tools;
     ActionBar actionBar;
+    String latestVer;
+    String latestVerInfo;
+    ProgressDialog progressDialog;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -88,6 +96,7 @@ public class TimeBubMain extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));//获取drawer_layout的id……【这个到底在哪里啊
         restoreActionBar();
+        new Thread(new getLatestVer()).start();
         GetServiceStatus serviceStatus = new GetServiceStatus();
 //        mNavigationDrawerFragment.openDrawer();
         tools = new TimeBubTools(this);
@@ -175,6 +184,20 @@ public class TimeBubMain extends ActionBarActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff41bbbc")));
+    }
+
+    class getLatestVer extends Thread{
+        @Override
+        public void run() {
+            String result = httpProcess.getAppVersion();
+            Message msg=new Message();
+            Bundle bdl=new Bundle();
+            bdl.putString("result",result);
+            msg.what=1;
+            msg.setData(bdl);
+            handler.sendMessage(msg);
+            super.run();
+        }
     }
 
 //    @Override
@@ -329,6 +352,13 @@ public class TimeBubMain extends ActionBarActivity
                 JSONObject object = (JSONObject) tokener.nextValue();
                 String status = object.getString("status");
                 if (status.equals("0")) {
+                    if(msg.what==1){
+                        JSONObject dataObj=object.getJSONObject("data");
+                        latestVer=dataObj.getString("lastestVersion");
+                        latestVerInfo=dataObj.getString("updateInfo");
+                        if(!tools.getCurrentVer().equals(latestVer))
+                            updateDialog(latestVer.split(" ")[0],latestVerInfo);
+                    }
                     String temdata = object.getString("data");
                     if (temdata.equals("success")) {
                         tools.makeToast("本次惩罚为扣除积分100，经验值将清零");
@@ -426,5 +456,68 @@ public class TimeBubMain extends ActionBarActivity
             Toast.makeText(this, "null",
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+    protected void updateDialog(String ver,String infomation){
+        final String lVer=ver;
+        AlertDialog.Builder builder=new AlertDialog.Builder(TimeBubMain.this);
+//        builder.setIcon(getResources().getDrawable(R.drawable.logo));
+        builder.setTitle("泡泡叫你来升级啦");
+        builder.setMessage("版本:" + ver + "\n更新日志:" + infomation);
+
+        progressDialog=new ProgressDialog(TimeBubMain.this);
+        progressDialog.setMessage("泡泡正在升级");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        builder.setPositiveButton("立即升级", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String fileName1 = "timeBub_V" + lVer + ".apk";
+                File file1 = new File(Environment.getExternalStorageDirectory(), fileName1);
+                if(tools.fileIsExists(file1)){
+                    tools.makeToast("更新包已下载，将直接安装");
+                    tools.installAPK(file1);
+                    return;
+                }
+                if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                    progressDialog.show();
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            String fileName = "timeBub_V" + lVer + ".apk";
+                            File file = new File(Environment.getExternalStorageDirectory(), fileName);
+                            file = tools.getUpdateFile("http://120.26.132.72:8089/apk/lastest.apk", file.getAbsolutePath(), progressDialog);
+                            if (file != null) {
+                                Message msg = new Message();
+                                Bundle bdl = new Bundle();
+                                bdl.putString("result", "downLoad finished");
+                                msg.setData(bdl);
+                                msg.obj = file;
+                                handler.sendMessage(msg);
+                                super.run();
+                            } else {
+                                Message msg = new Message();
+                                Bundle bdl = new Bundle();
+                                bdl.putString("result", "downLoad error");
+                                msg.setData(bdl);
+                                handler.sendMessage(msg);
+                                super.run();
+                            }
+                            progressDialog.dismiss();
+                            super.run();
+                        }
+                    }.start();
+                } else {
+                    tools.makeToast("存储空间不可用");
+                }
+            }
+        });
+        builder.setNegativeButton("下次再说", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 }
