@@ -129,8 +129,8 @@ public class TimeBub_Frag_Main extends Fragment {
 //                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
 //                    return;
                 }
-                if(!isMoney) tools.makeToast("您未设置学习时间，默认为30分钟");
-                if(!isTime) tools.makeToast("您未设置金额，默认为2.0元");
+                if(!isTime) tools.makeToast("您未设置学习时间，默认为30分钟");
+                if(!isMoney) tools.makeToast("您未设置金额，默认为2.0元");
                 if(lockDao.findAll().size()==0){
                     tools.makeToast("不选应用就想学习？想得美！");
                     return;

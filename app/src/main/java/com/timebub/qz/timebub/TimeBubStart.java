@@ -50,7 +50,7 @@ public class TimeBubStart extends Activity {
 ////            share.saveData("lastState", "normal");
 //        }
         startbtn = (LinearLayout) findViewById(R.id.startbtn);
-        if (!userid.equals("Not Found") && !userToken.equals("Not Found")) {
+        if ((!userid.equals("Not Found")&&!userid.equals("")) && (!userToken.equals("Not Found")&&!userToken.equals(""))) {
             Public_Enum.userID=userid;
             Public_Enum.userToken=userToken;
             Thread checkLgn=new Thread(new checkLogin());

@@ -55,6 +55,7 @@ public class TimeBubMain extends ActionBarActivity
      * 通过mNavigationDrawerFragment来调用
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    static public TimeBubMain timeBubMain=null;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -90,7 +91,7 @@ public class TimeBubMain extends ActionBarActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);//这个就是找到开始的navigation drawer啦
         //其实还是侧滑菜单那个东西= =
         mTitle = getTitle();//获取action bar的标题
-
+        timeBubMain=this;
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,

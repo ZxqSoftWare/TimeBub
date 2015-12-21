@@ -3,17 +3,16 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 21
     buildToolsVersion '23.0.1'
-
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
     }
     defaultConfig {
-        applicationId "com.timebub.qz.protectyoureyes"
+        applicationId 'com.timebub.qz.timebub'
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 325
+        versionCode 330
         versionName "1.2"
     }
     buildTypes {
@@ -22,6 +21,8 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 

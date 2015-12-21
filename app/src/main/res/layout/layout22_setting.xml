@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="修改密码"
             android:id="@+id/recharge"
-            android:textColor="#ff43bbbc"
+            android:textColor="#6b8592"
             android:layout_marginTop="10dp"
             android:textSize="18dp"
             android:layout_marginLeft="2dp" />
