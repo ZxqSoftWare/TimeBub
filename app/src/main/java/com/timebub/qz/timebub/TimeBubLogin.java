@@ -81,6 +81,10 @@ public class TimeBubLogin extends Activity {
         @Override
         public void handleMessage(Message msg) {
             String result =msg.getData().getString("status");
+            if (result.equals("timeout")) {
+                tools.makeToast(Public_Enum.timeoutMsg);
+                return;
+            }
             if(result!=""){
                 httpProcess=new HTTPProcess(TimeBubLogin.this);
                 tools=new TimeBubTools(TimeBubLogin.this);
@@ -88,8 +92,6 @@ public class TimeBubLogin extends Activity {
                     JSONTokener tokener = new JSONTokener(result);
                     JSONObject object = (JSONObject) tokener.nextValue();
                     String userid=object.getString("status");
-
-                    
                     if(userid.equals("0")) {
 //                        tools.makeToast("登陆成功"+userdata.getString("userId"));
                         JSONObject userdata=object.getJSONObject("data");

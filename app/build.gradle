@@ -10,7 +10,7 @@ android {
     }
     defaultConfig {
         applicationId 'com.timebub.qz.timebub'
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 21
         versionCode 330
         versionName "1.2"
