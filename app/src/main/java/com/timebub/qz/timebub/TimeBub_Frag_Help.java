@@ -39,6 +39,8 @@ public class TimeBub_Frag_Help extends Fragment {
 
         web.loadUrl("file:///android_asset/help.html");
     }
+
+
 }
 
 
