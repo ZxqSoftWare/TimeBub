@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.timebub.qz.applock.AppLockDao;
 import com.timebub.qz.applock.AppLockService;
+import com.timebub.qz.timebubtools.GetServiceStatus;
 import com.timebub.qz.timebubtools.IService;
 import com.timebub.qz.timebubtools.TimeBubSharePreference;
 import com.timebub.qz.timebubtools.TimeBubTools;
@@ -60,7 +61,6 @@ public class TimeBub_Frag_Main extends Fragment {
     String latestVerInfo;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,24 +72,56 @@ public class TimeBub_Frag_Main extends Fragment {
         learnTime = (TextView) view.findViewById(R.id.learn_time);
         money = (TextView) view.findViewById(R.id.textView);
         lockDao = new AppLockDao(getActivity().getApplicationContext());
-        httpProcess=new HTTPProcess(getActivity());
+        httpProcess = new HTTPProcess(getActivity());
         serviceIntent = new Intent(getActivity().getApplicationContext(), AppLockService.class);
         conn = new MyConn();
-
         getActivity().bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
         tools = new TimeBubTools(getActivity().getApplicationContext());
         sharePreference = new TimeBubSharePreference(TimeBub_Frag_Main.this.getActivity().getApplicationContext());
         if (!sharePreference.getData("timeLimt").equals("Not Found") && !sharePreference.getData("money").equals("Not Found")) {
             String timeHour1 = sharePreference.getData("timeLimt").split(":")[0];
             String timeMin1 = sharePreference.getData("timeLimt").split(":")[1];
-            if(Integer.parseInt(timeHour1)<10)timeHour1="0"+timeHour1;
-            if(Integer.parseInt(timeMin1)<10)timeMin1="0"+timeMin1;
+            if (Integer.parseInt(timeHour1) < 10) timeHour1 = "0" + timeHour1;
+            if (Integer.parseInt(timeMin1) < 10) timeMin1 = "0" + timeMin1;
             learnTime.setText(timeHour1 + " : " + timeMin1);
             money.setText(sharePreference.getData("money"));
         }
 //        updateDialog("V1.2","test");
-        String tem=tools.getCurrentVer();
+        String tem = tools.getCurrentVer();
 //        new Thread(new getLatestVer()).start();
+//        GetServiceStatus serviceStatus = new GetServiceStatus();
+//        if (serviceStatus.getServiceStatus(getActivity().getApplicationContext(), "com.timebub.qz.applock.AppLockService")) {
+//            if(iService.isLocking()) {
+//                tools.makeToast("检测到您正在学习，将继续上次的进程");
+//                Intent intent = new Intent(getActivity().getApplicationContext(), TimeBubAppLocking.class);
+//                startActivity(intent);
+//            }
+//        }
+
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                GetServiceStatus serviceStatus = new GetServiceStatus();
+//                while (iService == null) {
+//                    try {
+//                        Thread.sleep(100);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                if (serviceStatus.getServiceStatus(getActivity().getApplicationContext(), "com.timebub.qz.applock.AppLockService")) {
+//                    boolean tem = iService.isLocking();
+//                    if (iService.isLocking()) {
+//                        tools.makeToast("检测到您正在学习，将继续上次的进程");
+//                        Intent intent = new Intent(getActivity().getApplicationContext(), TimeBubAppLocking.class);
+//                        startActivity(intent);
+//                    }
+//                }
+//                super.run();
+//            }
+//        }.start();
+
+
         setTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,22 +148,23 @@ public class TimeBub_Frag_Main extends Fragment {
             public void onClick(View view) {
                 String date = String.valueOf(System.currentTimeMillis());
                 sharePreference.saveData("startDate", date);
-                boolean isTime=true;
-                boolean isMoney=true;
-                if(sharePreference.getData("timeLimt").toString().equals("Not Found")){
-                    sharePreference.saveData("timeLimt","0:30");
-                    isTime=false;
-//                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
-//                    return;
-                }if(sharePreference.getData("money").toString().equals("Not Found")){
-                    sharePreference.saveData("money","2.0");
-                    isMoney=false;
+                boolean isTime = true;
+                boolean isMoney = true;
+                if (sharePreference.getData("timeLimt").toString().equals("Not Found")) {
+                    sharePreference.saveData("timeLimt", "0:30");
+                    isTime = false;
 //                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
 //                    return;
                 }
-                if(!isTime) tools.makeToast("您未设置学习时间，默认为30分钟");
-                if(!isMoney) tools.makeToast("您未设置金额，默认为2.0元");
-                if(lockDao.findAll().size()==0){
+                if (sharePreference.getData("money").toString().equals("Not Found")) {
+                    sharePreference.saveData("money", "2.0");
+                    isMoney = false;
+//                    tools.makeToast("由于您没有修改时间或者金钱，将以默认的设置开始本服务，默认值为时限30分钟，金额2.0元");
+//                    return;
+                }
+                if (!isTime) tools.makeToast("您未设置学习时间，默认为30分钟");
+                if (!isMoney) tools.makeToast("您未设置金额，默认为2.0元");
+                if (lockDao.findAll().size() == 0) {
                     tools.makeToast("不选应用就想学习？想得美！");
                     return;
                 }
@@ -142,7 +175,7 @@ public class TimeBub_Frag_Main extends Fragment {
                     packageNames = lockDao.findAll();
                     Thread upload = new Thread(new upLoadStudyInfo());
                     upload.start();
-                    sharePreference.saveData("lastState","using");
+                    sharePreference.saveData("lastState", "using");
                     Intent intent = new Intent(TimeBub_Frag_Main.this.getActivity(), TimeBubAppLocking.class);
                     getActivity().startActivity(intent);
                 } else {
@@ -177,18 +210,18 @@ public class TimeBub_Frag_Main extends Fragment {
             Bundle bundle = data.getBundleExtra("lokingTime");
             timeHour = bundle.getString("hour");
             timeMin = bundle.getString("min");
-            tools.makeToast("设置了"+String.valueOf(timeHour) + "小时" + String.valueOf(timeMin) + "分钟");
+            tools.makeToast("设置了" + String.valueOf(timeHour) + "小时" + String.valueOf(timeMin) + "分钟");
             sharePreference.saveData("timeLimt", timeHour + ":" + timeMin);
-            String timeHour1=timeHour, timeMin1=timeMin;
-            if(Integer.parseInt(timeHour1)<10)timeHour1="0"+timeHour1;
-            if(Integer.parseInt(timeMin1)<10)timeMin1="0"+timeMin1;
-            learnTime.setText(timeHour1+" : "+timeMin1);
+            String timeHour1 = timeHour, timeMin1 = timeMin;
+            if (Integer.parseInt(timeHour1) < 10) timeHour1 = "0" + timeHour1;
+            if (Integer.parseInt(timeMin1) < 10) timeMin1 = "0" + timeMin1;
+            learnTime.setText(timeHour1 + " : " + timeMin1);
         }
         if (requestCode == 1 && resultCode == 1) {
             Bundle bundle = data.getBundleExtra("lockingMoney");
             tools.makeToast("设置了" + bundle.getString("money"));
             sharePreference.saveData("money", bundle.getString("money"));
-            money.setText("￥"+bundle.getString("money"));
+            money.setText("￥" + bundle.getString("money"));
         }
     }
 
@@ -210,13 +243,12 @@ public class TimeBub_Frag_Main extends Fragment {
             Message msg = new Message();
             Bundle bdl = new Bundle();
             bdl.putString("result", result);
-            msg.what=2;
+            msg.what = 2;
             msg.setData(bdl);
             handler.sendMessage(msg);
             super.run();
         }
     }
-
 
 
     Handler handler = new Handler() {
@@ -227,13 +259,12 @@ public class TimeBub_Frag_Main extends Fragment {
                 tools.makeToast(Public_Enum.timeoutMsg);
                 return;
             }
-            if(result.equals("downLoad finished")){
+            if (result.equals("downLoad finished")) {
                 tools.makeToast(result);
-                tools.installAPK((File)msg.obj);
+                tools.installAPK((File) msg.obj);
                 return;
             }
-            if(result.equals("downLoad error"))
-            {
+            if (result.equals("downLoad error")) {
                 tools.makeToast(result);
                 return;
             }
@@ -244,17 +275,17 @@ public class TimeBub_Frag_Main extends Fragment {
                 String data = "";
                 status = object.getString("status");
                 if (status.equals("0")) {
-                    if(msg.what==2) {
+                    if (msg.what == 2) {
                         data = object.getString("data");
 //                        tools.makeToast("上传用户学习成功，数据回传ID为:" + data);
                         sharePreference.saveData("lockID", data);
                     }
-                    if(msg.what==1){
-                        JSONObject dataObj=object.getJSONObject("data");
-                        latestVer=dataObj.getString("lastestVersion");
-                        latestVerInfo=dataObj.getString("updateInfo");
-                        if(!tools.getCurrentVer().equals(latestVer))
-                        updateDialog(latestVer.split(" ")[0],latestVerInfo);
+                    if (msg.what == 1) {
+                        JSONObject dataObj = object.getJSONObject("data");
+                        latestVer = dataObj.getString("lastestVersion");
+                        latestVerInfo = dataObj.getString("updateInfo");
+                        if (!tools.getCurrentVer().equals(latestVer))
+                            updateDialog(latestVer.split(" ")[0], latestVerInfo);
                     }
 
                 }
@@ -322,14 +353,14 @@ public class TimeBub_Frag_Main extends Fragment {
         getActivity().unbindService(conn);
     }
 
-    class getLatestVer extends Thread{
+    class getLatestVer extends Thread {
         @Override
         public void run() {
             String result = httpProcess.getAppVersion();
-            Message msg=new Message();
-            Bundle bdl=new Bundle();
-            bdl.putString("result",result);
-            msg.what=1;
+            Message msg = new Message();
+            Bundle bdl = new Bundle();
+            bdl.putString("result", result);
+            msg.what = 1;
             msg.setData(bdl);
             handler.sendMessage(msg);
             super.run();
@@ -337,16 +368,14 @@ public class TimeBub_Frag_Main extends Fragment {
     }
 
 
-
-
-    protected void updateDialog(String ver,String infomation){
-        final String lVer=ver;
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+    protected void updateDialog(String ver, String infomation) {
+        final String lVer = ver;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 //        builder.setIcon(getResources().getDrawable(R.drawable.logo));
         builder.setTitle("泡泡叫你来升级啦");
         builder.setMessage("版本:" + ver + "\n更新日志:" + infomation);
 
-        progressDialog=new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("泡泡正在升级");
         progressDialog.setCancelable(false);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -355,7 +384,7 @@ public class TimeBub_Frag_Main extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String fileName1 = "timeBub_V" + lVer + ".apk";
                 File file1 = new File(Environment.getExternalStorageDirectory(), fileName1);
-                if(tools.fileIsExists(file1)){
+                if (tools.fileIsExists(file1)) {
                     tools.makeToast("更新包已下载，将直接安装");
                     tools.installAPK(file1);
                     return;
@@ -401,8 +430,6 @@ public class TimeBub_Frag_Main extends Fragment {
         });
         builder.create().show();
     }
-
-
 
 
 }

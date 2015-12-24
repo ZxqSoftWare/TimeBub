@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -15,6 +17,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -35,6 +38,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.timebub.qz.applock.AppLockService;
 import com.timebub.qz.timebubtools.GetServiceStatus;
+import com.timebub.qz.timebubtools.IService;
 import com.timebub.qz.timebubtools.TimeBubSharePreference;
 import com.timebub.qz.timebubtools.TimeBubTools;
 
@@ -56,7 +60,9 @@ public class TimeBubMain extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
     static public TimeBubMain timeBubMain=null;
-
+    IService iService;
+    MyConn conn;
+    Intent serviceIntent;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -72,6 +78,7 @@ public class TimeBubMain extends ActionBarActivity
     String latestVer;
     String latestVerInfo;
     ProgressDialog progressDialog;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -87,6 +94,9 @@ public class TimeBubMain extends ActionBarActivity
         httpProcess = new HTTPProcess(this);
         share = new TimeBubSharePreference(this);
         actionBar = getSupportActionBar();
+        serviceIntent = new Intent(TimeBubMain.this.getApplicationContext(), AppLockService.class);
+        conn = new MyConn();
+        bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);//这个就是找到开始的navigation drawer啦
         //其实还是侧滑菜单那个东西= =
@@ -102,22 +112,53 @@ public class TimeBubMain extends ActionBarActivity
 //        mNavigationDrawerFragment.openDrawer();
         tools = new TimeBubTools(this);
         lastStudyState = share.getData("lastState");
+        if(!serviceStatus.getServiceStatus(TimeBubMain.this, "com.timebub.qz.applock.AppLockService")) {
+            if (lastStudyState.equals("Not Found") || lastStudyState.equals("normal")) {
+                share.saveData("lastState", "normal");
+            } else {
+                tools.makeToast("曾经的强退带来了今天的惩罚，接招吧！");
+                Thread checkLgn = new Thread(new shutDownApp());
+                checkLgn.start();
+//            share.saveData("lastState", "normal");
+            }
+        }
+
+        new Thread() {
+            @Override
+            public void run() {
+                GetServiceStatus serviceStatus = new GetServiceStatus();
+                while (iService == null) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (serviceStatus.getServiceStatus(getApplicationContext(), "com.timebub.qz.applock.AppLockService")) {
+                    boolean tem = iService.isLocking();
+                    if (iService.isLocking()) {
+                        tools.makeToast("检测到您正在学习，将继续上次的进程");
+                        Intent intent = new Intent(getApplicationContext(), TimeBubAppLocking.class);
+                        startActivity(intent);
+                    }
+                }
+                super.run();
+            }
+        }.start();
+
         if (serviceStatus.getServiceStatus(TimeBubMain.this, "com.timebub.qz.applock.AppLockService")) {
-//            tools.makeToast("服务正在运行");
+//            if(iService.isLocking()) {
+//                tools.makeToast("检测到您正在学习，将继续上次的进程");
+//                Intent intent = new Intent(TimeBubMain.this, TimeBubAppLocking.class);
+//                startActivity(intent);
+//            }
         } else {
             Intent intent1 = new Intent(TimeBubMain.this, AppLockService.class);
             startService(intent1);
 //            tools.makeToast("服务启动成功");
 
         }
-        if (lastStudyState.equals("Not Found") || lastStudyState.equals("normal")) {
-            share.saveData("lastState", "normal");
-        } else {
-            tools.makeToast("曾经的强退带来了今天的惩罚，接招吧！");
-            Thread checkLgn = new Thread(new shutDownApp());
-            checkLgn.start();
-//            share.saveData("lastState", "normal");
-        }
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -520,5 +561,25 @@ public class TimeBubMain extends ActionBarActivity
             }
         });
         builder.create().show();
+    }
+
+    private class MyConn implements ServiceConnection {
+        //在操作者在连接一个服务成功时被调用。IBinder对象就是onBind(Intent intent)返回的IBinder对象。
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            //因为返回的IBinder实现了iService接口（向上转型）
+            iService = (IService) service;
+        }
+
+        //在服务崩溃或被杀死导致的连接中断时被调用，而如果我们自己解除绑定时则不会被调用
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+
+        //解除绑定
+        unbindService(conn);
     }
 }

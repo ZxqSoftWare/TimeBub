@@ -10,6 +10,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:singleLine="false"
         />
 
     <Button
@@ -21,5 +22,21 @@
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/shape_green"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/txtfeedback"
+        android:layout_marginRight="20dp"
+        android:layout_above="@+id/button4"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信号：Timpo-one\n有问题就来私戳微信号Timpo哦\n泡泡君等着你来勾搭~"
+            android:layout_centerInParent="true"
+            android:textColor="#B6B6B6"
+            android:textSize="20dp"/>
+    </RelativeLayout>
 
 </RelativeLayout>
